@@ -5,10 +5,11 @@
   "author": "Anish Karandikar <anishkny@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "vuepress build"
+    "build": "vuepress build",
+    "test": "rm -rf .vuepress/dist && npm run build && stat .vuepress/dist/index.html"
   },
   "devDependencies": {
-    "vuepress": "^0.3.1"
+    "vuepress": "^0.10.0"
   },
   "dependencies": {
     "npm": "^5.8.0"
