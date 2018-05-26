@@ -1,6 +1,8 @@
 # vuepress-base
 
-Starter template for a [VuePress](https://vuepress.vuejs.org) site
+*Starter template for a [VuePress](https://vuepress.vuejs.org) site*
+
+[![Build Status](https://travis-ci.org/anishkny/vuepress-base.svg?branch=master)](https://travis-ci.org/anishkny/vuepress-base)
 
 ## One-click Deploy
 
