@@ -13,6 +13,7 @@ To try it out locally, clone this repo and generate a static site
 ```bash
 git clone https://github.com/anishkny/vuepress-base
 cd vuepress-base
+npm install
 npm run build
 ```
 
