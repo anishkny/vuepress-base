@@ -51,6 +51,13 @@ describe('Screenshot tests', () => {
         imgExp.width, imgAct.height, { threshold: 0.1 });
       if (numDiffPixels > 0) {
         diff.pack().pipe(fs.createWriteStream(`${workdir}/diff.png`));
+        fs.copyFileSync(`${goldenScreenshotDir}/expected.png`, `${workdir}/expected.png`);
+        fs.writeFileSync(`${workdir}/index.html`,
+          'Expected:<br><img src="expected.png"><hr>Actual:<br><img src="actual.png"><hr>Diff:<br><img src="diff.png">');
+        if (process.env.CI && process.env.SURGE_TOKEN) {
+          console.log('Uploading screenshot diff to: http://vuepress-base.surge.sh/');
+          require('child_process').execSync(`SURGE_TOKEN=${process.env.SURGE_TOKEN} npx surge ${workdir} vuepress-base.surge.sh`, { stdio: [0, 1, 2] });
+        }
         throw new Error([
           `Actual screenshot did not match expected golden. Number of differing pixels: [${numDiffPixels}]`,
           `  Expected: ${goldenScreenshotDir}/expected.png`,
