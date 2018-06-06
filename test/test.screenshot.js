@@ -54,7 +54,7 @@ describe('Screenshot tests', () => {
         fs.copyFileSync(`${goldenScreenshotDir}/expected.png`, `${workdir}/expected.png`);
         fs.writeFileSync(`${workdir}/index.html`,
           'Expected:<br><img src="expected.png"><hr>Actual:<br><img src="actual.png"><hr>Diff:<br><img src="diff.png">');
-        if (process.env.CI && process.env.SURGE_TOKEN) {
+        if (process.env.CI && process.env.SURGE_LOGIN && process.env.SURGE_TOKEN) {
           console.log('Uploading screenshot diff to: http://vuepress-base.surge.sh/');
           require('child_process').execSync(`SURGE_TOKEN=${process.env.SURGE_TOKEN} npx surge ${workdir} vuepress-base.surge.sh`, { stdio: [0, 1, 2] });
         }
