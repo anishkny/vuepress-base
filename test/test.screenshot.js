@@ -27,7 +27,7 @@ describe('Screenshot tests', () => {
   it('should match golden screenshot', async () => {
     const workdir = await tempdir();
     const page = await browser.newPage();
-    await page.goto('http://localhost:24981/', {
+    await page.goto('http://127.0.0.1:8080/', {
       waitUntil: 'networkidle0',
     });
     page.setViewport({ width: 800, height: 600 });
