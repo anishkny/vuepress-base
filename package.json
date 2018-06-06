@@ -6,9 +6,9 @@
   "license": "MIT",
   "scripts": {
     "build": "rm -rf .vuepress/dist && vuepress build",
-    "start": "npm run stop && http-server -p 8080 .vuepress/dist/ & sleep 5",
+    "start": "npm run stop && http-server -a localhost -p 8080 .vuepress/dist/ &",
     "stop": "pkill -f http-server || true",
-    "test": "npm run build && npm run start && mocha"
+    "test": "mocha"
   },
   "devDependencies": {
     "http-server": "^0.11.1",

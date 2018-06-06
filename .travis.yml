@@ -2,3 +2,8 @@ language: node_js
 
 node_js:
   - "lts/*"
+
+before_script:
+  - npm run build
+  - npm run start
+  - while ! nc -z localhost 8080; do sleep 1; done

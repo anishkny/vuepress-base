@@ -9,6 +9,7 @@ const goldenScreenshotDir = `${__dirname}/golden-screenshots`;
 describe('Screenshot tests', () => {
 
   let browser = null;
+
   before(async () => {
     // Ensure golden screenshot exists
     if (!fs.existsSync(`${goldenScreenshotDir}/expected.png`)) {
@@ -27,7 +28,7 @@ describe('Screenshot tests', () => {
   it('should match golden screenshot', async () => {
     const workdir = await tempdir();
     const page = await browser.newPage();
-    await page.goto('http://127.0.0.1:8080/', {
+    await page.goto('http://localhost:8080/', {
       waitUntil: 'networkidle0',
     });
     page.setViewport({ width: 800, height: 600 });
@@ -50,10 +51,13 @@ describe('Screenshot tests', () => {
         imgExp.width, imgAct.height, { threshold: 0.1 });
       if (numDiffPixels > 0) {
         diff.pack().pipe(fs.createWriteStream(`${workdir}/diff.png`));
-        throw new Error(`Actual screenshot did not match expected golden.\n` +
-          `  Number of differing pixels: [${numDiffPixels}]\n` +
-          `  Actual: ${workdir}/actual.png\n  Diff: ${workdir}/diff.png\n` +
-          `If this is epxected, please re-run test with GENERATE_GOLDEN_SCREENSHOTS=1`);
+        throw new Error([
+          `Actual screenshot did not match expected golden. Number of differing pixels: [${numDiffPixels}]`,
+          `  Expected: ${goldenScreenshotDir}/expected.png`,
+          `    Actual: ${workdir}/actual.png`,
+          `      Diff: ${workdir}/diff.png`,
+          `To regenerate golden screenshots, please re-run test with GENERATE_GOLDEN_SCREENSHOTS=1`
+        ].join("\n"));
       }
     }
   });
