@@ -5,13 +5,17 @@
   "author": "Anish Karandikar <anishkny@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "vuepress build",
-    "test": "rm -rf .vuepress/dist && npm run build && stat .vuepress/dist/index.html"
+    "build": "rm -rf .vuepress/dist && vuepress build",
+    "start": "npm run stop && http-server -a localhost -p 24981 .vuepress/dist/ & sleep 5",
+    "stop": "pkill -f http-server || true",
+    "test": "npm run build && npm run start && mocha"
   },
   "devDependencies": {
+    "http-server": "^0.11.1",
+    "mocha": "^5.2.0",
+    "pixelmatch": "^4.0.2",
+    "puppeteer": "^1.4.0",
+    "tempdir": "^2.0.0",
     "vuepress": "^0.10.0"
-  },
-  "dependencies": {
-    "npm": "^5.8.0"
   }
 }
