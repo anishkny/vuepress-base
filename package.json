@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build": "rm -rf .vuepress/dist && vuepress build",
-    "start": "npm run stop && http-server -a localhost -p 8080 .vuepress/dist/ &",
+    "start": "http-server -a localhost -p 8080 .vuepress/dist/ &",
     "stop": "pkill -f http-server || true",
     "test": "mocha"
   },
