@@ -28,7 +28,7 @@ describe('Screenshot tests', () => {
   it('should match golden screenshot', async () => {
     const workdir = await tempdir();
     const page = await browser.newPage();
-    await page.goto('http://localhost:8080/', {
+    await page.goto('http://127.0.0.1:8080/', {
       waitUntil: 'networkidle0',
     });
     page.setViewport({ width: 800, height: 600 });
@@ -50,7 +50,7 @@ describe('Screenshot tests', () => {
       const numDiffPixels = pixelmatch(imgExp.data, imgAct.data, diff.data,
         imgExp.width, imgAct.height, { threshold: 0.1 });
       if (numDiffPixels > 0) {
-        diff.pack().pipe(fs.createWriteStream(`${workdir}/diff.png`));
+        fs.writeFileSync(`${workdir}/diff.png`, PNG.sync.write(diff.pack()));
         fs.copyFileSync(`${goldenScreenshotDir}/expected.png`, `${workdir}/expected.png`);
         fs.writeFileSync(`${workdir}/index.html`,
           'Expected:<br><img src="expected.png"><hr>Actual:<br><img src="actual.png"><hr>Diff:<br><img src="diff.png">');

@@ -6,5 +6,5 @@ node_js:
 before_script:
   - npm run build
   - npm run start
-  - while ! nc -z localhost 8080; do sleep 1; done
-  - curl http://localhost:8080/
+  - while ! nc -z 127.0.0.1 8080; do sleep 1; done
+  - curl http://127.0.0.1:8080/
