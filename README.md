@@ -17,6 +17,7 @@ git clone https://github.com/anishkny/vuepress-base
 cd vuepress-base
 npm install
 npm run build
+npm run start
 ```
 
 For more information, see [VuePress Docs](https://vuepress.vuejs.org)
